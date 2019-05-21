@@ -1,0 +1,4 @@
+NOTES:
+
+- check district group by values nan
+- what are vertcal lines in seaborn barplot
