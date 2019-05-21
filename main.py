@@ -10,8 +10,11 @@ df = pd.read_csv(dataset_path, engine='python')
 print(df.head(10))
 print(df.dtypes)
 print(df.columns.values)
+print(df.shape)
 
-# drop not useful columns
+# choose only useful columns
+df = df[['INCIDENT_NUMBER', 'DISTRICT', 'SHOOTING', 'YEAR',
+         'MONTH', 'DAY_OF_WEEK', 'HOUR', 'Lat', 'Long', 'Location']]
 
 print(df.shape)
 # calculate the % of null values on each column
@@ -40,3 +43,17 @@ make_plot(month_group, 'Month', 'Crime frequency',
           'Crime frequency by month', images_path, 'month.png')
 make_plot(day_group, 'Day', 'Crime frequency',
           'Crime frequency by day', images_path, 'day.png')
+make_plot(distr_group, 'District', 'Crime frequency',
+          'Crime frequency by district', images_path, 'district.png')
+
+# find in which year most shootings have occured
+shootings_year_group = df.loc[df['SHOOTING'] == 'Y'].groupby(
+    ['YEAR'])['INCIDENT_NUMBER'].count()
+print(shootings_year_group)
+print('Year with most shootings: ', shootings_year_group.idxmax())
+
+# find in which district most shooting have occured
+shootings_distr_group = df.loc[df['SHOOTING'] == 'Y'].groupby(
+    ['DISTRICT'])['INCIDENT_NUMBER'].count()
+print(shootings_distr_group)
+print('District with most shootings: ', shootings_distr_group.idxmax())
