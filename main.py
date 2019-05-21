@@ -1,5 +1,10 @@
 import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
 from plot_data import make_plot
+
 
 # SET YOUR LOCAL PATHS to be used later in the program
 dataset_path = './crime.csv'
@@ -75,3 +80,13 @@ light_group = df.loc[df['LIGHT'] == 'day'].groupby(
     ['OFFENSE_CODE_GROUP'])['INCIDENT_NUMBER'].count()
 print(light_group)
 print('Most frequent type of crime during the day is', light_group.idxmax())
+
+print(df[['Lat', 'Long', 'Location']].head(100))
+location = df[['Lat', 'Long']]
+# drop nan values in location
+location = location.dropna()
+# remove outliers
+location = location.loc[(location['Lat'] > 40) & (location['Long'] < -60)]
+# make a scatterplot for crime locations
+ax = sns.scatterplot(x='Long', y='Lat', data=location)
+plt.show()
