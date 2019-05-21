@@ -1,3 +1,3 @@
 NOTES:
 
-- change nan values in some columns
+- recheck everything
