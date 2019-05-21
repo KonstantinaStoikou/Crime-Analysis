@@ -1,4 +1,3 @@
 NOTES:
 
-- check district group by values nan
-- what are vertcal lines in seaborn barplot
+- change nan values in some columns
